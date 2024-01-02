@@ -1,7 +1,7 @@
 # Calculator :abacus:🤓👆
 
 ## Introduction
-This calculator was built following Clear Code's tutorial [Introduction to GUIs in Python with PyQt5](https://www.youtube.com/watch?v=8jrEVihl-E4) on YouTube. But the project idea was taken from [CodeCrafters github](https://github.com/codecrafters-io/build-your-own-x), definetly recommend it.
+This calculator was built following Clear Code's tutorial [Introduction to GUIs in Python with PyQt5](https://www.youtube.com/watch?v=8jrEVihl-E4) on YouTube. But the project idea was taken from [florinpop17 github](https://github.com/florinpop17/app-ideas/blob/master/Projects/1-Beginner/Calculator-App.md), definetly recommend checking it out.
 
 > ### What it does now?
 > Well, this calculator is very basic and can only multiply, divide, sum and subtract. However, it has many bugs. Which will be fixed.
