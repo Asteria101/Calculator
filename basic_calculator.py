@@ -25,7 +25,7 @@ class MainWindow(qtw.QWidget):
         btn_result = qtw.QPushButton('=', clicked = self.func_result)
         btn_clear_all = qtw.QPushButton('AC', clicked = self.clear_calc)
         # btn_del_num = qtw.QPushButton('DEL')
-        btn_times = qtw.QPushButton('X', clicked = lambda:self.func_press('X'))
+        btn_times = qtw.QPushButton('X', clicked = lambda:self.func_press('*'))
         btn_minus = qtw.QPushButton('-', clicked = lambda:self.func_press('-'))
         btn_plus = qtw.QPushButton('+', clicked = lambda:self.func_press('+'))
         btn_divide = qtw.QPushButton('/', clicked = lambda:self.func_press('/'))
