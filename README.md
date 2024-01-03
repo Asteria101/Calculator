@@ -14,7 +14,8 @@ This calculator was built following Clear Code's tutorial [Introduction to GUIs 
 :sparkle: Implement New Features :chart_with_upwards_trend:
 > - Possibility to show a real number as a fraction or decimal;
 > - Keep the last answer in a variable ```ANS```; :white_check_mark:
-> - Button ```DEL``` for deleting the last digit or operator;
+> - Button ```DEL``` for deleting the last digit or operator; :white_check_mark:
+> - Button ```%``` for percentage function;
 > - Button ```POW``` for power function;
 > - Button  ```Log``` for logarithmic function;
 
