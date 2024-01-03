@@ -2,6 +2,8 @@ import PyQt5.QtWidgets as qtw
 
 CALCULATOR_VERSION = "0.0.1"
 
+OPERATORS = ['+', '-', '*', '/']
+
 class MainWindow(qtw.QWidget):
     def __init__(self) -> None:
         super().__init__()
@@ -25,7 +27,7 @@ class MainWindow(qtw.QWidget):
         btn_result = qtw.QPushButton('=', clicked = self.func_result)
         btn_clear_all = qtw.QPushButton('AC', clicked = self.clear_calc)
         # btn_del_num = qtw.QPushButton('DEL')
-        btn_times = qtw.QPushButton('X', clicked = lambda:self.func_press('*'))
+        btn_times = qtw.QPushButton('*', clicked = lambda:self.func_press('*'))
         btn_minus = qtw.QPushButton('-', clicked = lambda:self.func_press('-'))
         btn_plus = qtw.QPushButton('+', clicked = lambda:self.func_press('+'))
         btn_divide = qtw.QPushButton('/', clicked = lambda:self.func_press('/'))
@@ -74,10 +76,15 @@ class MainWindow(qtw.QWidget):
         self.fin_nums.append(temp_string)
         self.fin_nums.append(operator)
         self.temp_nums = []
+        print(self.fin_nums)
         self.result_field.setText(''.join(self.fin_nums))
 
     def func_result(self):
-        fin_string = ''.join(self.fin_nums) + ''.join(self.temp_nums)
+        if '+' or '-' or '*' or '/' in self.fin_nums:
+            fin_string = ''.join(self.fin_nums) + self.fin_nums[0]
+        else:    
+            fin_string = ''.join(self.fin_nums) + ''.join(self.temp_nums)
+
         if fin_string:
             result_string = eval(fin_string)
             fin_string += '='
