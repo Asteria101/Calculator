@@ -15,6 +15,7 @@ class MainWindow(qtw.QWidget):
 
         self.temp_nums = []
         self.fin_nums = []
+        self.ANS = ''
 
         self.show()
 
@@ -76,20 +77,21 @@ class MainWindow(qtw.QWidget):
         self.fin_nums.append(temp_string)
         self.fin_nums.append(operator)
         self.temp_nums = []
-        print(self.fin_nums)
         self.result_field.setText(''.join(self.fin_nums))
 
     def func_result(self):
-        if '+' or '-' or '*' or '/' in self.fin_nums:
-            fin_string = ''.join(self.fin_nums) + self.fin_nums[0]
-        else:    
+        if self.temp_nums:
             fin_string = ''.join(self.fin_nums) + ''.join(self.temp_nums)
+        else:    
+            fin_string = ''.join(self.fin_nums) + self.fin_nums[0]
 
         if fin_string:
             result_string = eval(fin_string)
-            fin_string += '='
-            fin_string += str(result_string)
-        self.result_field.setText(fin_string)
+            self.ANS = str(result_string)
+
+        self.result_field.setText(self.ANS)
+        self.temp_nums = self.ANS
+        self.fin_nums = []
 
     def clear_calc(self):
         self.result_field.clear()
