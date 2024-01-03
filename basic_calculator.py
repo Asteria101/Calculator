@@ -78,9 +78,10 @@ class MainWindow(qtw.QWidget):
 
     def func_result(self):
         fin_string = ''.join(self.fin_nums) + ''.join(self.temp_nums)
-        result_string = eval(fin_string)
-        fin_string += '='
-        fin_string += str(result_string)
+        if fin_string:
+            result_string = eval(fin_string)
+            fin_string += '='
+            fin_string += str(result_string)
         self.result_field.setText(fin_string)
 
     def clear_calc(self):
