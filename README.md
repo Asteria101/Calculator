@@ -9,7 +9,7 @@ This calculator was built following Clear Code's tutorial [Introduction to GUIs 
 ### Prospects :bulb:	
 :sparkle: Fix Bugs ⚠️:space_invader:
 > - When '=' is pressed treat error; :white_check_mark:
-> - When an operator is inserted at the end;
+> - When an operator is inserted at the end; :white_check_mark:
 
 :sparkle: Implement New Features :chart_with_upwards_trend:
 > - Possibility to show a real number as a fraction or decimal;
