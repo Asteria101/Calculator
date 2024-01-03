@@ -1,8 +1,6 @@
 import PyQt5.QtWidgets as qtw
 
-CALCULATOR_VERSION = "0.0.1"
-
-OPERATORS = ['+', '-', '*', '/']
+CALCULATOR_VERSION = "v1.2"
 
 class MainWindow(qtw.QWidget):
     def __init__(self) -> None:
@@ -28,12 +26,16 @@ class MainWindow(qtw.QWidget):
         btn_result = qtw.QPushButton('=', clicked = self.func_result)
         btn_clear_all = qtw.QPushButton('AC', clicked = self.clear_calc)
         btn_del_num = qtw.QPushButton('DEL', clicked = self.del_digit)
+        btn_answer = qtw.QPushButton('Ans', clicked = lambda:self.answer)
         btn_pow = qtw.QPushButton('POW', clicked = self.power)
+        
         btn_times = qtw.QPushButton('*', clicked = lambda:self.func_press('*'))
         btn_minus = qtw.QPushButton('-', clicked = lambda:self.func_press('-'))
         btn_plus = qtw.QPushButton('+', clicked = lambda:self.func_press('+'))
         btn_divide = qtw.QPushButton('/', clicked = lambda:self.func_press('/'))
+
         btn_percentage = qtw.QPushButton('%', clicked = lambda:self.percentage('%'))
+
         btn_9 = qtw.QPushButton('9', clicked = lambda:self.num_press('9'))
         btn_8 = qtw.QPushButton('8', clicked = lambda:self.num_press('8'))
         btn_7 = qtw.QPushButton('7', clicked = lambda:self.num_press('7'))
@@ -47,6 +49,7 @@ class MainWindow(qtw.QWidget):
 
         # Adds to the layout
         container.layout().addWidget(self.result_field, 0, 0, 1, 4)
+        container.layout().addWidget(btn_answer, 1, 0, 1, 1)
         container.layout().addWidget(btn_result, 1, 1, 1, 1)
         container.layout().addWidget(btn_clear_all, 1, 2, 1, 1)
         container.layout().addWidget(btn_del_num, 1, 3, 1, 1)
@@ -93,17 +96,29 @@ class MainWindow(qtw.QWidget):
             self.ANS = str(result_string)
 
         self.result_field.setText(self.ANS)
-        self.temp_nums = self.ANS
+        self.temp_nums = [self.ANS]
         self.fin_nums = []
 
     def clear_calc(self):
         self.result_field.clear()
         self.temp_nums = []
         self.fin_nums = []
+        self.ANS = ''
 
     def del_digit(self):
         self.result_field.backspace()
         self.temp_nums = []
+
+    def power(self):
+        pow = ''.join(self.temp_nums) + '*' + ''.join(self.temp_nums)
+        result_string = eval(pow)
+        self.ANS = str(result_string)
+        self.result_field.setText(self.ANS)
+        self.temp_nums = self.ANS
+        self.fin_nums = []
+
+    def answer(self):
+        self.temp_nums = [self.ANS]
 
         
 
