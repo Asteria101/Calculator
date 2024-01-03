@@ -7,8 +7,8 @@ This calculator was built following Clear Code's tutorial [Introduction to GUIs 
 > Well, this calculator is very basic and can only multiply, divide, sum and subtract. However, it has many bugs. Which will be fixed.
 
 ### Prospects :bulb:	
-:negative_squared_cross_mark: Fix Bugs ⚠️🐛
-> - When '=' is pressed treat error;
+:negative_squared_cross_mark: Fix Bugs ⚠️:space_invader:
+> - When '=' is pressed treat error; :white_check_mark:
 > - When an operator is inserted at the end;
 
 :negative_squared_cross_mark: Implement New Features :chart_with_upwards_trend:
