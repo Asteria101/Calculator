@@ -16,6 +16,7 @@ This calculator was built following Clear Code's tutorial [Introduction to GUIs 
 > - Keep the last answer in a variable ```ANS```; :white_check_mark:
 > - Button ```DEL``` for deleting the last digit or operator; :white_check_mark:
 > - Button ```%``` for percentage function;
+> - Add button ```+/-``` for switch the signal of the number;
 > - Button ```POW``` for power function;
 > - Button  ```Log``` for logarithmic function;
 
