@@ -1,4 +1,4 @@
-# Calculator :abacus:🤓👆
+# Basic Calculator :abacus:🤓👆
 
 ## Introduction
 This calculator was built following Clear Code's tutorial [Introduction to GUIs in Python with PyQt5](https://www.youtube.com/watch?v=8jrEVihl-E4) on YouTube. But the project idea was taken from [florinpop17 github](https://github.com/florinpop17/app-ideas/blob/master/Projects/1-Beginner/Calculator-App.md), definetly recommend checking it out.
@@ -17,8 +17,4 @@ This calculator was built following Clear Code's tutorial [Introduction to GUIs 
 > - Button ```DEL``` for deleting the last digit or operator;
 > - Button ```POW``` for power function;
 > - Button  ```Log``` for logarithmic function;
-
-:negative_squared_cross_mark: Linear Algebra Features [🔢]
-> - Basic operations with matrices, such as sum, subtraction and multiplication. As well as, Gaussian Elimination.
-> - Furthermore, solving linear systems.
 
