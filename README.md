@@ -11,7 +11,7 @@ This calculator was built following Clear Code's tutorial [Introduction to GUIs 
 > - When '=' is pressed treat error; :white_check_mark:
 > - When an operator is inserted at the end; :white_check_mark:
 > - Syntax Error when 0 is added at the beginning of the number; :white_check_mark:
-> - Issue with ```DEL``` feature;
+> - Issue with ```DEL``` feature for floats;
 
 :sparkle: Implement New Features :chart_with_upwards_trend:
 > - Possibility to show a real number as a fraction or decimal;
