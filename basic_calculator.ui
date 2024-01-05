@@ -1,0 +1,985 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Calculator</class>
+ <widget class="QMainWindow" name="Calculator">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>401</width>
+    <height>650</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>5</y>
+      <width>390</width>
+      <height>580</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:rgba(16, 30, 41, 240);
+border-radius:15px;</string>
+    </property>
+    <widget class="QLineEdit" name="result_field">
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>20</y>
+       <width>360</width>
+       <height>150</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>20</pointsize>
+       <kerning>true</kerning>
+      </font>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color:rgba(17, 30, 42, 255);
+border-bottom:2px solid rgba(0, 0, 0, 0);
+border-bottom-color:rgba(46, 82, 101, 255);
+color:rgb(255, 255, 255);
+padding-bottom:7px;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="maxLength">
+      <number>32772</number>
+     </property>
+     <property name="cursorPosition">
+      <number>0</number>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="ANS">
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>180</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#ANS{
+background-color:rgba(55, 80, 100, 255);
+color:rgba(241, 241, 241, 255);
+border-radius:8px;
+}
+
+QPushButton#ANS:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(55, 80, 100, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#ANS:hover{
+background-color:rgba(55, 80, 100, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>ANS</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="AC">
+     <property name="geometry">
+      <rect>
+       <x>106</x>
+       <y>180</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#AC{
+background-color:rgba(55, 80, 100, 255);
+color:rgba(241, 241, 241, 255);
+border-radius:8px;
+}
+
+QPushButton#AC:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(55, 80, 100, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#AC:hover{
+background-color:rgba(55, 80, 100, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>AC</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="C">
+     <property name="geometry">
+      <rect>
+       <x>197</x>
+       <y>180</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#C{
+background-color:rgba(55, 80, 100, 255);
+color:rgba(241, 241, 241, 255);
+border-radius:8px;
+}
+
+QPushButton#C:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(55, 80, 100, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#C:hover{
+background-color:rgba(55, 80, 100, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>C</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="DEL">
+     <property name="geometry">
+      <rect>
+       <x>288</x>
+       <y>180</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#DEL{
+background-color:rgba(55, 80, 100, 255);
+color:rgba(241, 241, 241, 255);
+border-radius:8px;
+}
+
+QPushButton#DEL:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(55, 80, 100, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#DEL:hover{
+background-color:rgba(55, 80, 100, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>DEL</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="POW">
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>244</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#POW{
+background-color:rgba(55, 80, 100, 255);
+color:rgba(241, 241, 241, 255);
+border-radius:8px;
+}
+
+QPushButton#POW:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(55, 80, 100, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#POW:hover{
+background-color:rgba(55, 80, 100, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>POW</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="SQRT">
+     <property name="geometry">
+      <rect>
+       <x>106</x>
+       <y>244</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#SQRT{
+background-color:rgba(55, 80, 100, 255);
+color:rgba(241, 241, 241, 255);
+border-radius:8px;
+}
+
+QPushButton#SQRT:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(55, 80, 100, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#SQRT:hover{
+background-color:rgba(55, 80, 100, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>SQRT</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="PERCENTAGE">
+     <property name="geometry">
+      <rect>
+       <x>197</x>
+       <y>244</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>14</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#PERCENTAGE{
+background-color:rgba(55, 80, 100, 255);
+color:rgba(241, 241, 241, 255);
+border-radius:8px;
+}
+
+QPushButton#PERCENTAGE:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(55, 80, 100, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#PERCENTAGE:hover{
+background-color:rgba(55, 80, 100, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>%</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="PLUS">
+     <property name="geometry">
+      <rect>
+       <x>288</x>
+       <y>244</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#PLUS{
+background-color:rgba(55, 80, 100, 255);
+color:rgba(241, 241, 241, 255);
+border-radius:8px;
+}
+
+QPushButton#PLUS:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(55, 80, 100, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#PLUS:hover{
+background-color:rgba(55, 80, 100, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>+</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="MINUS">
+     <property name="geometry">
+      <rect>
+       <x>288</x>
+       <y>308</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#MINUS{
+background-color:rgba(55, 80, 100, 255);
+color:rgba(241, 241, 241, 255);
+border-radius:8px;
+}
+
+QPushButton#MINUS:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(55, 80, 100, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#MINUS:hover{
+background-color:rgba(55, 80, 100, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>-</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="TIMES">
+     <property name="geometry">
+      <rect>
+       <x>288</x>
+       <y>372</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#TIMES{
+background-color:rgba(55, 80, 100, 255);
+color:rgba(241, 241, 241, 255);
+border-radius:8px;
+}
+
+QPushButton#TIMES:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(55, 80, 100, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#TIMES:hover{
+background-color:rgba(55, 80, 100, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>*</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="DIV">
+     <property name="geometry">
+      <rect>
+       <x>288</x>
+       <y>436</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#DIV{
+background-color:rgba(55, 80, 100, 255);
+color:rgba(241, 241, 241, 255);
+border-radius:8px;
+}
+
+QPushButton#DIV:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(55, 80, 100, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#DIV:hover{
+background-color:rgba(55, 80, 100, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>/</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="EQUAL">
+     <property name="geometry">
+      <rect>
+       <x>288</x>
+       <y>500</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#EQUAL{
+background-color:rgba(82, 113, 226, 255);
+color:rgba(241, 241, 241, 255);
+border-radius:8px;
+}
+
+QPushButton#EQUAL:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(82, 113, 226, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#EQUAL:hover{
+background-color:rgba(82, 113, 226, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>=</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="N1">
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>308</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#N1{
+background-color:rgba(85, 124, 154, 238);
+color:rgba(255, 255, 255, 255);
+border-radius:8px;
+}
+
+QPushButton#N1:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(85, 124, 154, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#N1:hover{
+background-color:rgba(85, 124, 154, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="N2">
+     <property name="geometry">
+      <rect>
+       <x>106</x>
+       <y>308</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#N2{
+background-color:rgba(85, 124, 154, 238);
+color:rgba(255, 255, 255, 255);
+border-radius:8px;
+}
+
+QPushButton#N2:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(85, 124, 154, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#N2:hover{
+background-color:rgba(85, 124, 154, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>2</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="N3">
+     <property name="geometry">
+      <rect>
+       <x>197</x>
+       <y>308</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#N3{
+background-color:rgba(85, 124, 154, 238);
+color:rgba(255, 255, 255, 255);
+border-radius:8px;
+}
+
+QPushButton#N3:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(85, 124, 154, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#N3:hover{
+background-color:rgba(85, 124, 154, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>3</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="N4">
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>372</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#N4{
+background-color:rgba(85, 124, 154, 238);
+color:rgba(255, 255, 255, 255);
+border-radius:8px;
+}
+
+QPushButton#N4:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(85, 124, 154, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#N4:hover{
+background-color:rgba(85, 124, 154, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>4</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="N5">
+     <property name="geometry">
+      <rect>
+       <x>106</x>
+       <y>372</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#N5{
+background-color:rgba(85, 124, 154, 238);
+color:rgba(255, 255, 255, 255);
+border-radius:8px;
+}
+
+QPushButton#N5:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(85, 124, 154, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#N5:hover{
+background-color:rgba(85, 124, 154, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>5</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="N6">
+     <property name="geometry">
+      <rect>
+       <x>197</x>
+       <y>372</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#N6{
+background-color:rgba(85, 124, 154, 238);
+color:rgba(255, 255, 255, 255);
+border-radius:8px;
+}
+
+QPushButton#N6:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(85, 124, 154, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#N6:hover{
+background-color:rgba(85, 124, 154, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>6</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="N7">
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>436</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#N7{
+background-color:rgba(85, 124, 154, 238);
+color:rgba(255, 255, 255, 255);
+border-radius:8px;
+}
+
+QPushButton#N7:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(85, 124, 154, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#N7:hover{
+background-color:rgba(85, 124, 154, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>7</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="SIGNAL">
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>500</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#SIGNAL{
+background-color:rgba(85, 124, 154, 238);
+color:rgba(255, 255, 255, 255);
+border-radius:8px;
+}
+
+QPushButton#SIGNAL:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(85, 124, 154, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#SIGNAL:hover{
+background-color:rgba(85, 124, 154, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>+/-</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="N0">
+     <property name="geometry">
+      <rect>
+       <x>106</x>
+       <y>500</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#N0{
+background-color:rgba(85, 124, 154, 238);
+color:rgba(255, 255, 255, 255);
+border-radius:8px;
+}
+
+QPushButton#N0:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(85, 124, 154, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#N0:hover{
+background-color:rgba(85, 124, 154, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="N8">
+     <property name="geometry">
+      <rect>
+       <x>106</x>
+       <y>436</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#N8{
+background-color:rgba(85, 124, 154, 238);
+color:rgba(255, 255, 255, 255);
+border-radius:8px;
+}
+
+QPushButton#N8:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(85, 124, 154, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#N8:hover{
+background-color:rgba(85, 124, 154, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>8</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="N9">
+     <property name="geometry">
+      <rect>
+       <x>197</x>
+       <y>436</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#N9{
+background-color:rgba(85, 124, 154, 238);
+color:rgba(255, 255, 255, 255);
+border-radius:8px;
+}
+
+QPushButton#N9:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(85, 124, 154, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#N9:hover{
+background-color:rgba(85, 124, 154, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>9</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="DECIMAL">
+     <property name="geometry">
+      <rect>
+       <x>197</x>
+       <y>500</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#DECIMAL{
+background-color:rgba(85, 124, 154, 238);
+color:rgba(255, 255, 255, 255);
+border-radius:8px;
+}
+
+QPushButton#DECIMAL:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(85, 124, 154, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#DECIMAL:hover{
+background-color:rgba(85, 124, 154, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>.</string>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>401</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
