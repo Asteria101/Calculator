@@ -1,6 +1,5 @@
 import PyQt5.QtWidgets as qtw
-from PyQt5 import uic
-import sys
+from PyQt5 import uic, QtCore, QtWidgets
 
 CALCULATOR_VERSION = "v1.5.5"
 
@@ -19,6 +18,15 @@ class MainWindow(qtw.QMainWindow, qtw.QWidget):
         self.ANS = ''
 
         self.central_widgets = self.findChild(qtw.QWidget, "centralwidget")
+
+        self.header = self.findChild(qtw.QFrame, "header_frame")
+        self.btn_frame = self.findChild(qtw.QFrame, "frame")
+        self.close_btn = self.findChild(qtw.QPushButton, "close_window_button")
+        self.minimize_btn = self.findChild(qtw.QPushButton, "minimize_window_button")
+        self.label = self.findChild(qtw.QLabel, "Name")
+
+        self.label.setText(f'Calculadora - {CALCULATOR_VERSION}')
+
         self.result_field = self.findChild(qtw.QLineEdit, "result_field")
 
         # Define Buttons
@@ -72,6 +80,11 @@ class MainWindow(qtw.QMainWindow, qtw.QWidget):
         self.btn_7.clicked.connect(self.num_press_7)
         self.btn_8.clicked.connect(self.num_press_8)
         self.btn_9.clicked.connect(self.num_press_9)
+
+        flags = QtCore.Qt.WindowFlags(QtCore.Qt.FramelessWindowHint)
+        self.setWindowFlags(flags)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.central_widgets.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=35, xOffset=0, yOffset=0))
 
         self.show()
 
