@@ -1,7 +1,7 @@
 import PyQt5.QtWidgets as qtw
 from PyQt5 import uic, QtCore, QtWidgets
 
-CALCULATOR_VERSION = "v1.5.5"
+CALCULATOR_VERSION = "v1.6"
 
 
 class MainWindow(qtw.QMainWindow, qtw.QWidget):

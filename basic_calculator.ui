@@ -1110,7 +1110,7 @@ background-color:rgba(223, 0, 0, 200);
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>icons/close_FILL0_wght400_GRAD0_opsz24.png</normaloff>icons/close_FILL0_wght400_GRAD0_opsz24.png</iconset>
+         <normaloff>icons/cross.svg</normaloff>icons/cross.svg</iconset>
        </property>
       </widget>
       <widget class="QPushButton" name="minimize_window_button">
@@ -1127,7 +1127,7 @@ background-color:rgba(223, 0, 0, 200);
        </property>
        <property name="styleSheet">
         <string notr="true">QPushButton#minimize_window_button{
-padding-bottom:7px;
+padding-bottom:0px;
 background-color:rgb(94, 139, 194);
 }
 
@@ -1147,7 +1147,7 @@ background-color:rgba(108, 159, 222, 255);
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>icons/minimize_FILL0_wght400_GRAD0_opsz24.png</normaloff>icons/minimize_FILL0_wght400_GRAD0_opsz24.png</iconset>
+         <normaloff>icons/minus.svg</normaloff>icons/minus.svg</iconset>
        </property>
       </widget>
      </widget>
