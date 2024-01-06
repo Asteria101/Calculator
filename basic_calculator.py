@@ -1,10 +1,11 @@
 import PyQt5.QtWidgets as qtw
 from PyQt5 import uic, QtCore, QtWidgets
+import sys
 
-CALCULATOR_VERSION = "v1.6"
+CALCULATOR_VERSION = "v1.7"
 
 
-class MainWindow(qtw.QMainWindow, qtw.QWidget):
+class MainWindow(qtw.QMainWindow):
     def __init__(self) -> None:
         super().__init__()
 
@@ -26,6 +27,9 @@ class MainWindow(qtw.QMainWindow, qtw.QWidget):
         self.label = self.findChild(qtw.QLabel, "Name")
 
         self.label.setText(f'Calculadora - {CALCULATOR_VERSION}')
+        self.header.mouseMoveEvent = self.MoveWindow
+        self.close_btn.clicked.connect(lambda: app.exit())
+        self.minimize_btn.clicked.connect(self.hideWindow)
 
         self.result_field = self.findChild(qtw.QLineEdit, "result_field")
 
@@ -87,6 +91,20 @@ class MainWindow(qtw.QMainWindow, qtw.QWidget):
         self.central_widgets.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=35, xOffset=0, yOffset=0))
 
         self.show()
+
+    def MoveWindow(self, event):
+        if self.isMaximized() == False:
+            self.move(self.pos() + event.globalPos() - self.clickPosition)
+            self.clickPosition = event.globalPos()
+            event.accept()
+            pass
+
+    def mousePressEvent(self, event):
+        self.clickPosition = event.globalPos()
+        pass
+
+    def hideWindow(self):
+        self.showMinimized()
 
     def num_press(self, key_number: str) -> None:
         self.temp_nums.append(key_number)
@@ -202,7 +220,8 @@ class MainWindow(qtw.QMainWindow, qtw.QWidget):
         self.fin_nums = []
 
 
-app = qtw.QApplication([])
-mw = MainWindow()
-app.setStyle(qtw.QStyleFactory.create('Fusion'))
-app.exec_()
+if __name__==  "__main__":
+    app = qtw.QApplication(sys.argv)
+    mw = MainWindow()
+    mw.show()
+    sys.exit(app.exec_())
