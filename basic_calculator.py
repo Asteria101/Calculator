@@ -1,8 +1,22 @@
 import PyQt5.QtWidgets as qtw
 from PyQt5 import uic, QtCore, QtWidgets
+from PyQt5.QtGui import *
 import sys
 
-CALCULATOR_VERSION = "v1.7"
+# Colors
+# celadon: #BDE4A8
+# tea green: #D7F2BA
+# lavander pink: #F44174
+# pink: #DB2763
+# bright pink: #F44174
+# ♥
+
+# self.face.setText("(*ᴗ͈ˬᴗ͈)ꕤ*.ﾟ")
+
+CALCULATOR_VERSION = "v1.8"
+
+FACE_BORDER_INFO = "border-radius : 17px; border : 1px outset rgb(37, 54, 68);"
+FACE_DEFAULT_STYLE_SHEET = FACE_BORDER_INFO + "color : rgba(74, 135, 185, 200); background-color : rgba(179, 255, 201, 255);"
 
 
 class MainWindow(qtw.QMainWindow):
@@ -32,6 +46,8 @@ class MainWindow(qtw.QMainWindow):
         self.minimize_btn.clicked.connect(self.hideWindow)
 
         self.result_field = self.findChild(qtw.QLineEdit, "result_field")
+
+        self.face = self.findChild(qtw.QLabel, "face")
 
         # Define Buttons
         self.btn_result = self.findChild(qtw.QPushButton,'EQUAL')
@@ -90,8 +106,12 @@ class MainWindow(qtw.QMainWindow):
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.central_widgets.setGraphicsEffect(QtWidgets.QGraphicsDropShadowEffect(blurRadius=35, xOffset=0, yOffset=0))
 
+        self.is_Line_empty()
+
         self.show()
 
+
+    # Window Bar
     def MoveWindow(self, event):
         if self.isMaximized() == False:
             self.move(self.pos() + event.globalPos() - self.clickPosition)
@@ -106,6 +126,30 @@ class MainWindow(qtw.QMainWindow):
     def hideWindow(self):
         self.showMinimized()
 
+
+    # Face Assets
+    def default_face(self):
+        self.face.setText("• ◡ •")
+        self.face.setStyleSheet(FACE_DEFAULT_STYLE_SHEET)
+
+    def face_del(self):
+        self.face.setText("\_(´• ⌓ •`)_/")
+        self.face.setStyleSheet(FACE_BORDER_INFO + "color : #06908F; background-color : #D7F2BA")
+
+    def face_result(self):
+        self.face.setText("˶• ◡ •˶")
+        self.face.setStyleSheet(FACE_BORDER_INFO + "color : #F2F5EA; background-color : #F44174")
+
+    def face_num(self):
+        self.face.setText("• ◡ •")
+        self.face.setStyleSheet(FACE_DEFAULT_STYLE_SHEET)
+
+    def face_op(self, op:str):
+        self.face.setText(op + "⸜(• ◡ •)⸝" + op)
+        self.face.setStyleSheet(FACE_BORDER_INFO + "color : #F2F5EA; background-color : #3A7CA5")
+
+
+    # Calculator Operations
     def num_press(self, key_number: str) -> None:
         self.temp_nums.append(key_number)
         if len(self.temp_nums) > 1 and self.temp_nums[0] == '0' and self.temp_nums[1] != '.':
@@ -119,33 +163,43 @@ class MainWindow(qtw.QMainWindow):
 
     def num_press_0(self):
         self.num_press('0')
+        self.face_num()
 
     def num_press_1(self):
         self.num_press('1')
+        self.face_num()
 
     def num_press_2(self):
         self.num_press('2')
+        self.face_num()
     
     def num_press_3(self):
         self.num_press('3')
+        self.face_num()
     
     def num_press_4(self):
         self.num_press('4')
+        self.face_num()
 
     def num_press_5(self):
         self.num_press('5')
+        self.face_num()
 
     def num_press_6(self):
         self.num_press('6')
+        self.face_num()
 
     def num_press_7(self):
         self.num_press('7')
+        self.face_num()
 
     def num_press_8(self):
         self.num_press('8')
+        self.face_num()
 
     def num_press_9(self):
         self.num_press('9')
+        self.face_num()
 
     def func_press(self, operator):
         temp_string = ''.join(self.temp_nums)
@@ -156,17 +210,30 @@ class MainWindow(qtw.QMainWindow):
 
     def times(self):
         self.func_press('*')
+        self.face_op('*')
 
     def divide(self):
         self.func_press('/')
+        self.face_op('÷')
 
     def plus(self):
         self.func_press('+')
+        self.face_op('+')
     
     def minus(self):
         self.func_press('-')
+        self.face_op('-')
+
+    def power(self):
+        pow = ''.join(self.temp_nums) + '*' + ''.join(self.temp_nums)
+        result_string = eval(pow)
+        self.ANS = str(result_string)
+        self.result_field.setText(self.ANS)
+        self.temp_nums = [self.ANS]
+        self.fin_nums = []
 
     def func_result(self):
+        self.face_result()
         if self.temp_nums:
             fin_string = ''.join(self.fin_nums) + ''.join(self.temp_nums)
         else:    
@@ -184,12 +251,28 @@ class MainWindow(qtw.QMainWindow):
         self.result_field.setText(self.ANS)
         self.temp_nums = [self.ANS]
         self.fin_nums = []
+    
+
+    # Result Field Matters
+    def is_Line_empty(self):
+        text = self.result_field.text()
+        if text == '':
+            self.result_field.setText('•  ◡  •')
+            self.face.setText('')
+            self.face.setStyleSheet("background-color: rgb(164, 234, 186);")
 
     def clear_calc(self):
         self.result_field.clear()
         self.temp_nums = []
         self.fin_nums = []
         self.ANS = ''
+        self.is_Line_empty()
+
+    def reset_nums(self):
+        self.result_field.clear()
+        self.temp_nums = []
+        self.fin_nums = []
+        self.is_Line_empty()
 
     # Fix issue for floats
     def del_digit(self):
@@ -198,26 +281,18 @@ class MainWindow(qtw.QMainWindow):
             temp = [digit for digit in self.temp_nums[0]]
             temp.pop()
             self.temp_nums = [''.join(temp)]
+            self.ANS = self.ANS[:-1]
+            self.face_del()
         else:
             self.temp_nums.pop()
+            self.face_del()
         
-
-    def power(self):
-        pow = ''.join(self.temp_nums) + '*' + ''.join(self.temp_nums)
-        result_string = eval(pow)
-        self.ANS = str(result_string)
-        self.result_field.setText(self.ANS)
-        self.temp_nums = self.ANS
-        self.fin_nums = []
-
+        self.is_Line_empty()
+        
     def answer(self):
         self.temp_nums = [self.ANS]
         self.result_field.setText(''.join(self.fin_nums) + self.ANS)
-
-    def reset_nums(self):
-        self.result_field.clear()
-        self.temp_nums = []
-        self.fin_nums = []
+        self.default_face()
 
 
 if __name__==  "__main__":
@@ -225,3 +300,4 @@ if __name__==  "__main__":
     mw = MainWindow()
     mw.show()
     sys.exit(app.exec_())
+
