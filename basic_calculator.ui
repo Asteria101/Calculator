@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>435</width>
-    <height>655</height>
+    <width>430</width>
+    <height>718</height>
    </rect>
   </property>
   <property name="font">
@@ -25,7 +25,7 @@
       <x>25</x>
       <y>25</y>
       <width>390</width>
-      <height>600</height>
+      <height>664</height>
      </rect>
     </property>
     <property name="font">
@@ -562,13 +562,13 @@ background-color:rgba(55, 80, 100, 200);
        <x>288</x>
        <y>520</y>
        <width>87</width>
-       <height>60</height>
+       <height>124</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <family>Cascadia Code</family>
-       <pointsize>14</pointsize>
+       <pointsize>19</pointsize>
       </font>
      </property>
      <property name="styleSheet">
@@ -600,7 +600,7 @@ background-color:rgba(82, 113, 226, 200);
      <property name="geometry">
       <rect>
        <x>15</x>
-       <y>328</y>
+       <y>392</y>
        <width>87</width>
        <height>60</height>
       </rect>
@@ -640,7 +640,7 @@ background-color:rgba(85, 124, 154, 200);
      <property name="geometry">
       <rect>
        <x>106</x>
-       <y>328</y>
+       <y>392</y>
        <width>87</width>
        <height>60</height>
       </rect>
@@ -680,7 +680,7 @@ background-color:rgba(85, 124, 154, 200);
      <property name="geometry">
       <rect>
        <x>197</x>
-       <y>328</y>
+       <y>392</y>
        <width>87</width>
        <height>60</height>
       </rect>
@@ -720,7 +720,7 @@ background-color:rgba(85, 124, 154, 200);
      <property name="geometry">
       <rect>
        <x>15</x>
-       <y>392</y>
+       <y>456</y>
        <width>87</width>
        <height>60</height>
       </rect>
@@ -760,7 +760,7 @@ background-color:rgba(85, 124, 154, 200);
      <property name="geometry">
       <rect>
        <x>106</x>
-       <y>392</y>
+       <y>456</y>
        <width>87</width>
        <height>60</height>
       </rect>
@@ -800,7 +800,7 @@ background-color:rgba(85, 124, 154, 200);
      <property name="geometry">
       <rect>
        <x>197</x>
-       <y>392</y>
+       <y>456</y>
        <width>87</width>
        <height>60</height>
       </rect>
@@ -840,7 +840,7 @@ background-color:rgba(85, 124, 154, 200);
      <property name="geometry">
       <rect>
        <x>15</x>
-       <y>456</y>
+       <y>520</y>
        <width>87</width>
        <height>60</height>
       </rect>
@@ -880,7 +880,7 @@ background-color:rgba(85, 124, 154, 200);
      <property name="geometry">
       <rect>
        <x>15</x>
-       <y>520</y>
+       <y>584</y>
        <width>87</width>
        <height>60</height>
       </rect>
@@ -920,7 +920,7 @@ background-color:rgba(85, 124, 154, 200);
      <property name="geometry">
       <rect>
        <x>106</x>
-       <y>520</y>
+       <y>584</y>
        <width>87</width>
        <height>60</height>
       </rect>
@@ -960,7 +960,7 @@ background-color:rgba(85, 124, 154, 200);
      <property name="geometry">
       <rect>
        <x>106</x>
-       <y>456</y>
+       <y>520</y>
        <width>87</width>
        <height>60</height>
       </rect>
@@ -1000,7 +1000,7 @@ background-color:rgba(85, 124, 154, 200);
      <property name="geometry">
       <rect>
        <x>197</x>
-       <y>456</y>
+       <y>520</y>
        <width>87</width>
        <height>60</height>
       </rect>
@@ -1040,7 +1040,7 @@ background-color:rgba(85, 124, 154, 200);
      <property name="geometry">
       <rect>
        <x>197</x>
-       <y>520</y>
+       <y>584</y>
        <width>87</width>
        <height>60</height>
       </rect>
@@ -1250,6 +1250,126 @@ background-color:rgba(179, 255, 201, 255);
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="FACTORIAL">
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>328</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#FACTORIAL{
+background-color:rgba(55, 80, 100, 255);
+border-bottom:2px solid rgba(0, 0, 0, 0);
+border-bottom-color:rgb(91, 134, 165);
+padding-bottom:5px;
+color:rgba(241, 241, 241, 255);
+border-radius:8px;
+}
+
+QPushButton#FACTORIAL:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(55, 80, 100, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#FACTORIAL:hover{
+background-color:rgba(55, 80, 100, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>x!</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="INV">
+     <property name="geometry">
+      <rect>
+       <x>106</x>
+       <y>328</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#INV{
+background-color:rgba(55, 80, 100, 255);
+border-bottom:2px solid rgba(0, 0, 0, 0);
+border-bottom-color:rgb(91, 134, 165);
+padding-bottom:5px;
+color:rgba(241, 241, 241, 255);
+border-radius:8px;
+}
+
+QPushButton#INV:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(55, 80, 100, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#INV:hover{
+background-color:rgba(55, 80, 100, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>1/x</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="LOG">
+     <property name="geometry">
+      <rect>
+       <x>197</x>
+       <y>328</y>
+       <width>87</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Cascadia Code</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#LOG{
+background-color:rgba(55, 80, 100, 255);
+border-bottom:2px solid rgba(0, 0, 0, 0);
+border-bottom-color:rgb(91, 134, 165);
+padding-bottom:5px;
+color:rgba(241, 241, 241, 255);
+border-radius:8px;
+}
+
+QPushButton#LOG:pressed{
+padding-left:4px;
+padding-top:4px;
+background-color:rgba(55, 80, 100, 100);
+background-position:calc(100% - 10px)center;
+}
+
+QPushButton#LOG:hover{
+background-color:rgba(55, 80, 100, 200);
+}</string>
+     </property>
+     <property name="text">
+      <string>log</string>
      </property>
     </widget>
    </widget>

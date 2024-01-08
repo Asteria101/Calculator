@@ -14,7 +14,7 @@ import sys
 
 # self.face.setText("(*ᴗ͈ˬᴗ͈)ꕤ*.ﾟ")
 
-CALCULATOR_VERSION = "v1.8"
+CALCULATOR_VERSION = "v2.1"
 
 FACE_BORDER_INFO = "border-radius : 17px; border : 1px outset rgb(37, 54, 68);"
 FACE_DEFAULT_STYLE_SHEET = FACE_BORDER_INFO + "color : rgba(74, 135, 185, 200); background-color : rgba(179, 255, 201, 255);"
@@ -59,7 +59,7 @@ class MainWindow(qtw.QMainWindow):
         self.btn_reset = self.findChild(qtw.QPushButton,'C')
         self.btn_answer = self.findChild(qtw.QPushButton,'ANS')
         self.btn_pow = self.findChild(qtw.QPushButton,'POW')
-        self.btn_percentage = self.findChild(qtw.QPushButton,'PERCENTAGE') # implement
+        self.btn_percentage = self.findChild(qtw.QPushButton,'PERCENTAGE')
         self.btn_sqrt = self.findChild(qtw.QPushButton,'SQRT')
         self.btn_times =self.findChild(qtw.QPushButton,'TIMES')
         self.btn_divide = self.findChild(qtw.QPushButton,'DIV')
@@ -67,6 +67,10 @@ class MainWindow(qtw.QMainWindow):
         self.btn_minus = self.findChild(qtw.QPushButton,'MINUS')
         self.btn_decimal_point = self.findChild(qtw.QPushButton,'DECIMAL')
         self.btn_switch_signal = self.findChild(qtw.QPushButton,'SIGNAL')
+        self.btn_fact = self.findChild(qtw.QPushButton, 'FACTORIAL')
+        self.btn_inverted = self.findChild(qtw.QPushButton, 'INV')
+        self.btn_log = self.findChild(qtw.QPushButton, 'LOG')
+
         self.btn_9 = self.findChild(qtw.QPushButton,'N9')
         self.btn_8 = self.findChild(qtw.QPushButton,'N8')
         self.btn_7 = self.findChild(qtw.QPushButton,'N7')
@@ -93,6 +97,8 @@ class MainWindow(qtw.QMainWindow):
         self.btn_minus.clicked.connect(self.minus)
         self.btn_decimal_point.clicked.connect(self.point_press)
         self.btn_switch_signal.clicked.connect(self.switch_signal)
+        self.btn_fact.clicked.connect(self.factorial)
+        self.btn_inverted.clicked.connect(self.invert)
         self.btn_0.clicked.connect(self.num_press_0)
         self.btn_1.clicked.connect(self.num_press_1)
         self.btn_2.clicked.connect(self.num_press_2)
@@ -419,6 +425,12 @@ class MainWindow(qtw.QMainWindow):
             self.result_field.setText("┐(•᷅ _ •᷅ )┌")
             self.face.setText('')
             self.face.setStyleSheet("background-color: rgb(164, 234, 186);")
+
+    def factorial(self):
+        pass
+
+    def invert(self):
+        pass
 
     def func_result(self):
         if self.fin_nums and self.temp_nums:
