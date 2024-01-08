@@ -18,6 +18,7 @@ This calculator was built following Clear Code's tutorial [Introduction to GUIs 
 > - Keep the last answer in a variable ```ANS```; ✅
 > - Button ```DEL``` for deleting the last digit or operator; ✅
 > - Button ```%``` for percentage function;
+> - Button ```SQRT``` for square root; ✅
 > - Add button ```+/-``` for switch the signal of the number;
 > - Button ```POW``` for power function; ✅
 > - Button  ```Log``` for logarithmic function;

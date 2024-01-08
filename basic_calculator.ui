@@ -30,6 +30,7 @@
     </property>
     <property name="font">
      <font>
+      <family>Cascadia Code</family>
       <pointsize>16</pointsize>
      </font>
     </property>
@@ -93,7 +94,7 @@ padding-bottom:7px;
       <string/>
      </property>
      <property name="maxLength">
-      <number>104</number>
+      <number>14</number>
      </property>
      <property name="cursorPosition">
       <number>0</number>
