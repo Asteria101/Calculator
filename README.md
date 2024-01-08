@@ -7,11 +7,11 @@ This calculator was built following Clear Code's tutorial [Introduction to GUIs 
 > Well, this calculator is very basic and can only multiply, divide, sum and subtract. However, it has many bugs. Which will be fixed.
 
 ### Prospects :bulb:	
-:sparkle: Fix Bugs ⚠️:space_invader:
-> - When '=' is pressed treat error; :white_check_mark:
-> - When an operator is inserted at the end; :white_check_mark:
-> - Syntax Error when 0 is added at the beginning of the number; :white_check_mark:
-> - Issue with ```DEL``` feature;
+❇️ Fix Bugs ⚠️:space_invader:
+> - When '=' is pressed treat error; ✅
+> - When an operator is inserted at the end; ✅
+> - Syntax Error when 0 is added at the beginning of the number; ✅
+> - Issue with ```DEL``` feature; ✅
 
 ❇️ Implement New Features 📈
 > - Possibility to show a real number as a fraction or decimal;
