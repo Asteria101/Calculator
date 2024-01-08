@@ -94,7 +94,10 @@ padding-bottom:7px;
       <string/>
      </property>
      <property name="maxLength">
-      <number>14</number>
+      <number>30</number>
+     </property>
+     <property name="frame">
+      <bool>true</bool>
      </property>
      <property name="cursorPosition">
       <number>0</number>
@@ -102,11 +105,17 @@ padding-bottom:7px;
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
+     <property name="dragEnabled">
+      <bool>true</bool>
+     </property>
      <property name="readOnly">
       <bool>true</bool>
      </property>
      <property name="placeholderText">
       <string/>
+     </property>
+     <property name="cursorMoveStyle">
+      <enum>Qt::VisualMoveStyle</enum>
      </property>
      <property name="clearButtonEnabled">
       <bool>false</bool>
@@ -1289,7 +1298,7 @@ background-color:rgba(55, 80, 100, 200);
 }</string>
      </property>
      <property name="text">
-      <string>x!</string>
+      <string>n!</string>
      </property>
     </widget>
     <widget class="QPushButton" name="INV">

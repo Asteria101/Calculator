@@ -1,18 +1,8 @@
-from math import sqrt
+from math import sqrt, factorial, log10
 import PyQt5.QtWidgets as qtw
 from PyQt5 import uic, QtCore, QtWidgets
 from PyQt5.QtGui import *
 import sys
-
-# Colors
-# celadon: #BDE4A8
-# tea green: #D7F2BA
-# lavander pink: #F44174
-# pink: #DB2763
-# bright pink: #F44174
-# ♥
-
-# self.face.setText("(*ᴗ͈ˬᴗ͈)ꕤ*.ﾟ")
 
 CALCULATOR_VERSION = "v2.1"
 
@@ -99,6 +89,7 @@ class MainWindow(qtw.QMainWindow):
         self.btn_switch_signal.clicked.connect(self.switch_signal)
         self.btn_fact.clicked.connect(self.factorial)
         self.btn_inverted.clicked.connect(self.invert)
+        self.btn_log.clicked.connect(self.logarithm)
         self.btn_0.clicked.connect(self.num_press_0)
         self.btn_1.clicked.connect(self.num_press_1)
         self.btn_2.clicked.connect(self.num_press_2)
@@ -173,6 +164,30 @@ class MainWindow(qtw.QMainWindow):
         self.face.setText('')
         self.face.setStyleSheet("background-color: #FF1B1C;")
 
+
+    # Special asset for QLineEdit
+    def evaluate_line(self):
+        text_len = len(self.result_field.text())
+        f = self.result_field.font()
+        if text_len >= 14 and text_len < 22:
+            f.setPointSize(16)
+            self.result_field.setFont(f)
+
+        elif text_len >= 22 and text_len < 30:
+            f.setPointSize(12)
+            self.result_field.setFont(f)
+
+    def reset_line(self):
+        text_len = len(self.result_field.text())
+        f = self.result_field.font()
+        if text_len > 14 and text_len <= 22:
+            f.setPointSize(16)
+            self.result_field.setFont(f)
+        elif text_len <= 14:
+            f.setPointSize(26)
+            self.result_field.setFont(f)
+
+
     # Calculator Operations
     def num_press(self, key: str) -> None:
         self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
@@ -181,6 +196,7 @@ class MainWindow(qtw.QMainWindow):
             self.temp_nums.append('0')
             self.temp_nums.append('.')
             self.result_field.setText(''.join(self.temp_nums))
+            self.evaluate_line()
 
         else:
             self.temp_nums.append(key)
@@ -190,8 +206,10 @@ class MainWindow(qtw.QMainWindow):
             temp_string = ''.join(self.temp_nums)
             if self.fin_nums:
                 self.result_field.setText(''.join(self.fin_nums) + temp_string)
+                self.evaluate_line()
             else:
                 self.result_field.setText(temp_string)
+                self.evaluate_line()
 
     def num_press_0(self):
         self.num_press('0')
@@ -246,6 +264,7 @@ class MainWindow(qtw.QMainWindow):
             else:
                 self.temp_nums.insert(0, '-')    
             self.result_field.setText(''.join(self.temp_nums))
+            self.evaluate_line()
 
         elif self.ANS == self.result_field.text():
             temp = [digit for digit in self.ANS]
@@ -257,15 +276,17 @@ class MainWindow(qtw.QMainWindow):
                 self.ANS = ''.join(temp)
                 self.temp_nums = temp
             self.result_field.setText(self.ANS)
+            self.evaluate_line()
 
     def func_press(self, operator: str):
         self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
-
         temp_string = ''.join(self.temp_nums)
         self.fin_nums.append(temp_string)
         self.fin_nums.append(operator)
         self.temp_nums = []
         self.result_field.setText(''.join(self.fin_nums))
+
+        self.evaluate_line()
 
     def error_operator(self, op):
         text = self.result_field.text()
@@ -308,6 +329,7 @@ class MainWindow(qtw.QMainWindow):
 
             self.ANS = string
             self.result_field.setText(self.ANS)
+            self.evaluate_line()
             self.temp_nums = [x for x in self.ANS]
             self.fin_nums = []
             self.face_result()
@@ -325,6 +347,7 @@ class MainWindow(qtw.QMainWindow):
 
             self.ANS = string
             self.result_field.setText(self.ANS)
+            self.evaluate_line()
             self.temp_nums = [x for x in self.ANS]
             self.fin_nums = []
             self.face_result()
@@ -340,6 +363,7 @@ class MainWindow(qtw.QMainWindow):
         if self.temp_nums:
             if '-' in self.fin_nums:
                 self.result_field.setText("Invalid Input")
+                self.evaluate_line()
                 self.face_error()
                 self.fin_nums = []
                 self.temp_nums = []
@@ -359,6 +383,7 @@ class MainWindow(qtw.QMainWindow):
 
                 self.ANS = string
                 self.result_field.setText(self.ANS)
+                self.evaluate_line()
                 self.temp_nums = [digit for digit in self.ANS]
                 self.fin_nums = []
 
@@ -384,6 +409,7 @@ class MainWindow(qtw.QMainWindow):
 
                 self.ANS = string
                 self.result_field.setText(self.ANS)
+                self.evaluate_line()
                 self.temp_nums = [digit for digit in self.ANS]
                 self.fin_nums = []
 
@@ -405,6 +431,7 @@ class MainWindow(qtw.QMainWindow):
             string = f'{res}'
             self.ANS = string
             self.result_field.setText(self.ANS)
+            self.evaluate_line()
             self.temp_nums = [digit for digit in self.ANS]
             self.fin_nums = []
 
@@ -418,6 +445,7 @@ class MainWindow(qtw.QMainWindow):
             string = f'{res}'
             self.ANS = string
             self.result_field.setText(self.ANS)
+            self.evaluate_line()
             self.temp_nums = [digit for digit in self.ANS]
             self.fin_nums = []
 
@@ -427,10 +455,132 @@ class MainWindow(qtw.QMainWindow):
             self.face.setStyleSheet("background-color: rgb(164, 234, 186);")
 
     def factorial(self):
-        pass
+        self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
+
+        if self.temp_nums:
+            if '.' in self.temp_nums:
+                self.result_field.setText("Invalid Input")
+                self.face_error()
+                self.fin_nums = []
+                self.temp_nums = []
+
+            elif '-' in self.fin_nums:
+                self.result_field.setText("Invalid Input")
+                self.face_error()
+                self.fin_nums = []
+                self.temp_nums = []
+
+            else:
+                num = int(''.join(self.temp_nums))
+                res = f'{factorial(num)}'
+
+                self.ANS = res
+                self.result_field.setText(f'{factorial(num):.16g}')
+                self.evaluate_line()
+                self.temp_nums = [digit for digit in self.ANS]
+                self.fin_nums = []
+
+        elif self.ANS:
+            if '.' in self.ANS:
+                self.result_field.setText("Invalid Input")
+                self.face_error()
+                self.fin_nums = []
+                self.temp_nums = []
+
+            elif '-' in self.ANS:
+                self.result_field.setText("Invalid Input")
+                self.face_error()
+                self.fin_nums = []
+                self.temp_nums = []
+
+            else:
+                num = int(self.ANS)
+                res = f'{factorial(num)}'
+
+                self.ANS = res
+                self.result_field.setText(f'{factorial(num):.16g}')
+                self.evaluate_line()
+                self.temp_nums = [digit for digit in self.ANS]
+                self.fin_nums = []
+
+        else:
+            self.result_field.setText("┐(•᷅ _ •᷅ )┌")
+            self.face.setText('')
+            self.face.setStyleSheet("background-color: rgb(164, 234, 186);")
 
     def invert(self):
-        pass
+        self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
+
+        if self.temp_nums:
+            if '.' in self.temp_nums:
+                num = float(''.join(self.temp_nums))
+            else:
+                num = int(''.join(self.temp_nums))
+            res = f'{1/num}'
+
+            self.ANS = res
+            self.result_field.setText(f'{(1/num):.5f}')
+            self.temp_nums = [digit for digit in self.ANS]
+            self.fin_nums = []
+
+        elif self.ANS:
+            if '.' in self.ANS:
+                num = float(''.join(self.ANS))
+            else:
+                num = int(''.join(self.ANS))
+            res = f'{1/num}'
+
+            self.ANS = res
+            self.result_field.setText(f'{(1/num):.5f}')
+            self.temp_nums = [digit for digit in self.ANS]
+            self.fin_nums = []
+
+        else:
+            self.result_field.setText("┐(•᷅ _ •᷅ )┌")
+            self.face.setText('')
+            self.face.setStyleSheet("background-color: rgb(164, 234, 186);")
+
+    def logarithm(self):
+        self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
+
+        if self.temp_nums:
+            if '.' in self.temp_nums:
+                num = float(''.join(self.temp_nums))
+            else:
+                num = int(''.join(self.temp_nums))
+            res = f'{log10(num)}'
+
+            if (num % 10) == 0:
+                res = f'{log10(num)}'
+            else:
+                res = f'{log10(num):.5f}'
+
+            self.ANS = res
+            self.result_field.setText(res)
+            self.temp_nums = [digit for digit in self.ANS]
+            self.fin_nums = []
+
+        elif self.ANS:
+            if '.' in self.ANS:
+                num = float(''.join(self.ANS))
+            else:
+                num = int(''.join(self.ANS))
+            res = f'{log10(num)}'
+
+            if (num % 10) == 0:
+                res = f'{log10(num)}'
+            else:
+                res = f'{log10(num):.5f}'
+
+            self.ANS = res
+            self.result_field.setText(res)
+            self.temp_nums = [digit for digit in self.ANS]
+            self.fin_nums = []
+
+        else:
+            self.result_field.setText("┐(•᷅ _ •᷅ )┌")
+            self.face.setText('')
+            self.face.setStyleSheet("background-color: rgb(164, 234, 186);")
 
     def func_result(self):
         if self.fin_nums and self.temp_nums:
@@ -453,47 +603,12 @@ class MainWindow(qtw.QMainWindow):
                 self.ANS = string
 
             self.result_field.setText(self.ANS)
+            self.evaluate_line()
             self.temp_nums = []
             self.fin_nums = []
         
         else:
             self.field_error()
-
-    
-    """
-    def calculate(self, exp:str) -> int:
-        if '+-' not in exp and '-+' not in exp:
-            if '-' in exp:
-                index = exp.index('-')
-                if exp[index + 1] == '-':
-                    exp = exp[:index+1] + exp[index + 2:]
-                result = int(exp[:index]) - int(exp[index + 1:])
-
-            elif '+' in exp:
-                index = exp.index('+')
-                if exp[index + 1] == '+':
-                    exp = exp[:index+1] + exp[index + 2:]
-                result = int(exp[:index]) + int(exp[index + 1:])
-            
-            elif '/' in exp:
-                index = exp.index('/')
-                result = int(exp[:index]) / int(exp[index + 1:])
-
-            elif '*' in exp:
-                index = exp.index('*')
-                result = int(exp[:index]) * int(exp[index + 1:])
-
-        # Special cases
-        if '-+' in exp:
-            index = exp.index('-')
-            result = int(exp[:index]) - int(exp[index + 2:])
-
-        elif '+-' in exp:
-            index = exp.index('+')
-            result = int(exp[:index]) + (-1 * (int(exp[index + 2:])))
-            
-        return result
-    """
 
 
     # Result Field Matters
@@ -508,6 +623,7 @@ class MainWindow(qtw.QMainWindow):
         self.temp_nums = []
         self.fin_nums = []
         self.ANS = ''
+        self.reset_line()
         self.is_Line_empty()
 
     def reset_nums(self):
@@ -515,6 +631,7 @@ class MainWindow(qtw.QMainWindow):
         self.result_field.clear()
         self.temp_nums = []
         self.fin_nums = []
+        self.reset_line()
         self.is_Line_empty()
 
     def del_digit(self):
@@ -523,10 +640,9 @@ class MainWindow(qtw.QMainWindow):
         self.result_field.backspace()
 
         if self.ANS[:-1] == self.result_field.text():
-            self.result_field.setText('0')
-            self.fin_nums = []
-            self.temp_nums = ['0']
-            self.face_num()
+            temp = [digit for digit in self.ANS]
+            temp.pop()
+            self.ANS = ''.join(temp)
 
         elif ''.join(self.fin_nums)[:-1] == self.result_field.text():
             if len(self.fin_nums) > 1:
@@ -541,7 +657,7 @@ class MainWindow(qtw.QMainWindow):
 
             self.face_del()
 
-        elif not self.temp_nums or not self.fin_nums:
+        elif self.temp_nums == [] and self.fin_nums == []:
             self.temp_nums = ['0']
             self.result_field.setText('0')
             self.default_face()
@@ -550,6 +666,7 @@ class MainWindow(qtw.QMainWindow):
             self.temp_nums.pop()
             self.face_del()
         
+        self.reset_line()
         self.is_Line_empty()
         
     def answer(self):
