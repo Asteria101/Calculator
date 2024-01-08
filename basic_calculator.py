@@ -18,7 +18,7 @@ CALCULATOR_VERSION = "v1.8"
 
 FACE_BORDER_INFO = "border-radius : 17px; border : 1px outset rgb(37, 54, 68);"
 FACE_DEFAULT_STYLE_SHEET = FACE_BORDER_INFO + "color : rgba(74, 135, 185, 200); background-color : rgba(179, 255, 201, 255);"
-RESULT_FIELD_DEFAULT = "color : rgba(71, 128, 177, 235); background-color : rgba(17, 30, 42, 255); border-bottom : 2px solid rgba(0, 0, 0, 0); border-bottom-color : rgba(46, 82, 101, 255); padding-bottom : 7px;"
+RESULT_FIELD_DEFAULT = "color : rgba(71, 128, 177, 235); background-color: rgba(179, 255, 201, 230); border-bottom : 3px solid rgba(0, 0, 0, 0); border-bottom-color : rgb(95, 136, 107); padding-bottom : 7px;"
 
 
 class MainWindow(qtw.QMainWindow):
@@ -60,13 +60,13 @@ class MainWindow(qtw.QMainWindow):
         self.btn_answer = self.findChild(qtw.QPushButton,'ANS')
         self.btn_pow = self.findChild(qtw.QPushButton,'POW')
         self.btn_percentage = self.findChild(qtw.QPushButton,'PERCENTAGE') # implement
-        self.btn_sqrt = self.findChild(qtw.QPushButton,'SQRT') #implement
+        self.btn_sqrt = self.findChild(qtw.QPushButton,'SQRT')
         self.btn_times =self.findChild(qtw.QPushButton,'TIMES')
         self.btn_divide = self.findChild(qtw.QPushButton,'DIV')
         self.btn_plus = self.findChild(qtw.QPushButton,'PLUS')
         self.btn_minus = self.findChild(qtw.QPushButton,'MINUS')
-        self.btn_decimal_point = self.findChild(qtw.QPushButton,'DECIMAL') # implement
-        self.btn_switch_signal = self.findChild(qtw.QPushButton,'SIGNAL') #implement
+        self.btn_decimal_point = self.findChild(qtw.QPushButton,'DECIMAL')
+        self.btn_switch_signal = self.findChild(qtw.QPushButton,'SIGNAL')
         self.btn_9 = self.findChild(qtw.QPushButton,'N9')
         self.btn_8 = self.findChild(qtw.QPushButton,'N8')
         self.btn_7 = self.findChild(qtw.QPushButton,'N7')
@@ -85,14 +85,14 @@ class MainWindow(qtw.QMainWindow):
         self.btn_reset.clicked.connect(self.reset_nums)
         self.btn_answer.clicked.connect(self.answer)
         self.btn_pow.clicked.connect(self.power)
-        # self.btn_percentage
+        self.btn_percentage.clicked.connect(self.percentage)
         self.btn_sqrt.clicked.connect(self.sqrt)
         self.btn_times.clicked.connect(self.times)
         self.btn_divide.clicked.connect(self.divide)
         self.btn_plus.clicked.connect(self.plus)
         self.btn_minus.clicked.connect(self.minus)
-        # self.btn_decimal_point
-        # self.btn_switch_signal
+        self.btn_decimal_point.clicked.connect(self.point_press)
+        self.btn_switch_signal.clicked.connect(self.switch_signal)
         self.btn_0.clicked.connect(self.num_press_0)
         self.btn_1.clicked.connect(self.num_press_1)
         self.btn_2.clicked.connect(self.num_press_2)
@@ -135,44 +135,57 @@ class MainWindow(qtw.QMainWindow):
         self.face.setText("• ◡ •")
         self.face.setStyleSheet(FACE_DEFAULT_STYLE_SHEET)
 
-        self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
-
     def face_del(self):
         self.face.setText("\_(´• ⌓ •`)_/")
         self.face.setStyleSheet(FACE_BORDER_INFO + "color : #06908F; background-color : #D7F2BA")
-
-        self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
 
     def face_result(self):
         self.face.setText("˶• ◡ •˶")
         self.face.setStyleSheet(FACE_BORDER_INFO + "color : #F2F5EA; background-color : #F44174")
 
-        self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
-
     def face_num(self):
         self.face.setText("• ◡ •")
         self.face.setStyleSheet(FACE_DEFAULT_STYLE_SHEET)
-
-        self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
 
     def face_op(self, op:str):
         self.face.setText(op + "⸜(• ◡ •)⸝" + op)
         self.face.setStyleSheet(FACE_BORDER_INFO + "color : #F2F5EA; background-color : #3A7CA5")
 
+    def face_error(self):
+        self.face.setText("¯\_(•`_ •´)_/¯")
+        self.face.setStyleSheet(FACE_BORDER_INFO + "color : #FFFFFF; background-color : #FF1B1C")
+
+    def field_default(self):
+        self.result_field.setText('•  ◡  •')
+        self.face.setText('')
+        self.face.setStyleSheet("background-color: rgb(164, 234, 186);")
         self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
 
+    def field_error(self):
+        self.result_field.setText('¯\_(•`_ •´)_/¯')
+        self.result_field.setStyleSheet("background-color: #FF1B1C; border-bottom : 3px solid rgba(0, 0, 0, 0); border-bottom-color : rgb(102, 1, 14); padding-bottom : 7px; color : #FFFFFF;")
+        self.face.setText('')
+        self.face.setStyleSheet("background-color: #FF1B1C;")
 
     # Calculator Operations
-    def num_press(self, key_number: str) -> None:
-        self.temp_nums.append(key_number)
-        if len(self.temp_nums) > 1 and self.temp_nums[0] == '0' and self.temp_nums[1] != '.':
-            self.temp_nums.remove('0')
+    def num_press(self, key: str) -> None:
+        self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
 
-        temp_string = ''.join(self.temp_nums)
-        if self.fin_nums:
-            self.result_field.setText(''.join(self.fin_nums) + temp_string)
+        if not self.temp_nums and key == '.':
+            self.temp_nums.append('0')
+            self.temp_nums.append('.')
+            self.result_field.setText(''.join(self.temp_nums))
+
         else:
-            self.result_field.setText(temp_string)
+            self.temp_nums.append(key)
+            if len(self.temp_nums) > 1 and self.temp_nums[0] == '0' and self.temp_nums[1] != '.':
+                self.temp_nums.remove('0')
+
+            temp_string = ''.join(self.temp_nums)
+            if self.fin_nums:
+                self.result_field.setText(''.join(self.fin_nums) + temp_string)
+            else:
+                self.result_field.setText(temp_string)
 
     def num_press_0(self):
         self.num_press('0')
@@ -214,20 +227,56 @@ class MainWindow(qtw.QMainWindow):
         self.num_press('9')
         self.face_num()
 
-    def func_press(self, operator):
+    def point_press(self):
+        self.num_press('.')
+        self.face_num()
+
+    def switch_signal(self):
+        self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
+
+        if self.temp_nums:
+            if self.temp_nums[0] == '-':
+                self.temp_nums.remove('-')
+            else:
+                self.temp_nums.insert(0, '-')    
+            self.result_field.setText(''.join(self.temp_nums))
+
+        elif self.ANS == self.result_field.text():
+            temp = [digit for digit in self.ANS]
+            if temp[0] == '-':
+                self.ANS = self.ANS[1:]
+                self.temp_nums = temp[1:]
+            else:
+                temp.insert(0, '-')
+                self.ANS = ''.join(temp)
+                self.temp_nums = temp
+            self.result_field.setText(self.ANS)
+
+    def func_press(self, operator: str):
+        self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
+
         temp_string = ''.join(self.temp_nums)
         self.fin_nums.append(temp_string)
         self.fin_nums.append(operator)
         self.temp_nums = []
         self.result_field.setText(''.join(self.fin_nums))
 
+    def error_operator(self, op):
+        text = self.result_field.text()
+        if text == '*' or text == '/':
+            self.fin_nums.remove(op)
+            self.face_error()
+
+        else:
+            self.face_op(op)
+
     def times(self):
         self.func_press('*')
-        self.face_op('*')
+        self.error_operator('*')
 
     def divide(self):
         self.func_press('/')
-        self.face_op('÷')
+        self.error_operator('/')
 
     def plus(self):
         self.func_press('+')
@@ -238,51 +287,166 @@ class MainWindow(qtw.QMainWindow):
         self.face_op('-')
 
     def power(self):
-        pow = int(''.join(self.temp_nums)) * int(''.join(self.temp_nums))
-        result_string = pow
-        self.ANS = str(result_string)
-        self.result_field.setText(self.ANS)
-        self.temp_nums = [self.ANS]
-        self.fin_nums = []
-
-    def sqrt(self):
-        if '.' in self.temp_nums[0]:
-            num = float(''.join(self.temp_nums))
-        else:
-            num = int(''.join(self.temp_nums))
-
-        res = sqrt(num)
-        string = str(res)
-
-        if isinstance(res, float):
-                if str(res)[-2:] == '.0':
-                    string = str(res)[:-2]
-
-        self.ANS = string
-        self.result_field.setText(self.ANS)
-        self.temp_nums = [digit for digit in self.ANS]
-        self.fin_nums = []
-
-    def func_result(self):
-        self.face_result()
+        self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
 
         if self.temp_nums:
-            fin_string = ''.join(self.fin_nums) + ''.join(self.temp_nums)
-        else:    
-            fin_string = ''.join(self.fin_nums) + self.fin_nums[0]
+            if '.' in self.temp_nums:
+                pow = float(''.join(self.temp_nums)) * float(''.join(self.temp_nums))
+            else:
+                pow = int(''.join(self.temp_nums)) * int(''.join(self.temp_nums))
 
-        if fin_string:
-            result_string = eval(fin_string)
-            string = str(result_string)
-            if isinstance(result_string, float):
-                if str(result_string)[-2:] == '.0':
-                    string = str(result_string)[0:-2]
+            string = str(pow)
+            if isinstance(pow, float):
+                    if str(pow)[-2:] == '.0':
+                        string = str(pow)[0:-2]
 
             self.ANS = string
+            self.result_field.setText(self.ANS)
+            self.temp_nums = [x for x in self.ANS]
+            self.fin_nums = []
+            self.face_result()
 
-        self.result_field.setText(self.ANS)
-        self.temp_nums = []
-        self.fin_nums = []
+        elif self.ANS:
+            if '.' in self.temp_nums:
+                pow = float(self.ANS) * float(self.ANS)
+            else:
+                pow = int(self.ANS) * int(self.ANS)
+
+            string = str(pow)
+            if isinstance(pow, float):
+                    if str(pow)[-2:] == '.0':
+                        string = str(pow)[0:-2]
+
+            self.ANS = string
+            self.result_field.setText(self.ANS)
+            self.temp_nums = [x for x in self.ANS]
+            self.fin_nums = []
+            self.face_result()
+
+        else:
+            self.result_field.setText("┐(•᷅ _ •᷅ )┌")
+            self.face.setText('')
+            self.face.setStyleSheet("background-color: rgb(164, 234, 186);")
+
+    def sqrt(self):
+        self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
+
+        if self.temp_nums:
+            if '-' in self.fin_nums:
+                self.result_field.setText("Invalid Input")
+                self.face_error()
+                self.fin_nums = []
+                self.temp_nums = []
+            
+            else:
+                if '.' in self.temp_nums:
+                    num = float(''.join(self.temp_nums))
+                else:
+                    num = int(''.join(self.temp_nums))
+
+                res = sqrt(num)
+                string = f"{res:.8f}"
+
+                if isinstance(res, float):
+                    if str(res)[-2:] == '.0':
+                        string = str(res)[:-2]
+
+                self.ANS = string
+                self.result_field.setText(self.ANS)
+                self.temp_nums = [digit for digit in self.ANS]
+                self.fin_nums = []
+
+        elif self.ANS:
+            if '-' in self.ANS:
+                self.result_field.setText("Invalid Input")
+                self.face_error()
+                self.fin_nums = []
+                self.temp_nums = []
+            
+            else:
+                if '.' in self.ANS:
+                    num = float(self.ANS)
+                else:
+                    num = int(self.ANS)
+
+                res = sqrt(num)
+                string = f"{res:.8f}"
+
+                if isinstance(res, float):
+                    if str(res)[-2:] == '.0':
+                        string = str(res)[:-2]
+
+                self.ANS = string
+                self.result_field.setText(self.ANS)
+                self.temp_nums = [digit for digit in self.ANS]
+                self.fin_nums = []
+
+        else:
+            self.result_field.setText("┐(•᷅ _ •᷅ )┌")
+            self.face.setText('')
+            self.face.setStyleSheet("background-color: rgb(164, 234, 186);")
+
+    def percentage(self):
+        self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
+        
+        if self.temp_nums:
+            if '.' in self.temp_nums:
+                num = float(''.join(self.temp_nums))
+            else:
+                num = int(''.join(self.temp_nums))
+
+            res = num / 100
+            string = f'{res}'
+            self.ANS = string
+            self.result_field.setText(self.ANS)
+            self.temp_nums = [digit for digit in self.ANS]
+            self.fin_nums = []
+
+        elif self.ANS:
+            if '.' in self.ANS:
+                num = float(self.ANS)
+            else:
+                num = int(self.ANS)
+
+            res = num / 100
+            string = f'{res}'
+            self.ANS = string
+            self.result_field.setText(self.ANS)
+            self.temp_nums = [digit for digit in self.ANS]
+            self.fin_nums = []
+
+        else:
+            self.result_field.setText("┐(•᷅ _ •᷅ )┌")
+            self.face.setText('')
+            self.face.setStyleSheet("background-color: rgb(164, 234, 186);")
+
+    def func_result(self):
+        if self.fin_nums and self.temp_nums:
+            self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
+
+            self.face_result()
+
+            if self.temp_nums:
+                fin_string = ''.join(self.fin_nums) + ''.join(self.temp_nums)
+            else:    
+                fin_string = ''.join(self.fin_nums) + self.fin_nums[0]
+
+            if fin_string:
+                result_string = eval(fin_string)
+                string = str(result_string)
+                if isinstance(result_string, float):
+                    if str(result_string)[-2:] == '.0':
+                        string = str(result_string)[0:-2]
+
+                self.ANS = string
+
+            self.result_field.setText(self.ANS)
+            self.temp_nums = []
+            self.fin_nums = []
+        
+        else:
+            self.field_error()
+
     
     """
     def calculate(self, exp:str) -> int:
@@ -324,13 +488,10 @@ class MainWindow(qtw.QMainWindow):
     def is_Line_empty(self):
         text = self.result_field.text()
         if text == '':
-            self.result_field.setText('•  ◡  •')
-            self.face.setText('')
-            self.face.setStyleSheet("background-color: rgb(164, 234, 186);")
-
-            self.result_field.setStyleSheet("color : rgba(71, 128, 177, 235); background-color : rgba(179, 255, 201, 230); border-bottom : 3px solid rgba(0, 0, 0, 0); border-bottom-color : rgb(95, 136, 107); padding-bottom : 7px;")
+            self.field_default()
 
     def clear_calc(self):
+        self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
         self.result_field.clear()
         self.temp_nums = []
         self.fin_nums = []
@@ -338,13 +499,15 @@ class MainWindow(qtw.QMainWindow):
         self.is_Line_empty()
 
     def reset_nums(self):
+        self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
         self.result_field.clear()
         self.temp_nums = []
         self.fin_nums = []
         self.is_Line_empty()
 
-    # Fix issue for floats
     def del_digit(self):
+        self.result_field.setStyleSheet(RESULT_FIELD_DEFAULT)
+
         self.result_field.backspace()
 
         if self.ANS[:-1] == self.result_field.text():
@@ -366,6 +529,11 @@ class MainWindow(qtw.QMainWindow):
 
             self.face_del()
 
+        elif not self.temp_nums or not self.fin_nums:
+            self.temp_nums = ['0']
+            self.result_field.setText('0')
+            self.default_face()
+
         else:
             self.temp_nums.pop()
             self.face_del()
@@ -373,7 +541,7 @@ class MainWindow(qtw.QMainWindow):
         self.is_Line_empty()
         
     def answer(self):
-        self.temp_nums = [self.ANS]
+        self.temp_nums = [x for x in self.ANS]
         self.result_field.setText(''.join(self.fin_nums) + self.ANS)
         self.default_face()
 
@@ -383,4 +551,3 @@ if __name__==  "__main__":
     mw = MainWindow()
     mw.show()
     sys.exit(app.exec_())
-
