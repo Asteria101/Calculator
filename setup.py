@@ -2,7 +2,13 @@ from cx_Freeze import setup, Executable
 
 # Dependencies are automatically detected, but it might need
 # fine tuning.
-build_options = {'packages': [], 'excludes': [], 'include_files' : ['basic_calculator.ui', 'cross.svg', 'minus.svg']}
+build_options = {'packages': [],
+                 'excludes': ['tkinter', 
+                              'unittest', 
+                              'email',
+                              'http'],
+                 'zip_include_packages' : ['PyQt5'],
+                 'include_files' : ['basic_calculator.ui', 'cross.svg', 'minus.svg']}
 
 import sys
 base = 'Win32GUI' if sys.platform=='win32' else None
