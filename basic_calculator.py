@@ -334,7 +334,7 @@ class MainWindow(qtw.QMainWindow):
             self.fin_nums = []
             self.face_result()
 
-        elif self.ANS:
+        elif self.ANS == self.result_field.text():
             if '.' in self.temp_nums:
                 pow = float(self.ANS) * float(self.ANS)
             else:
@@ -387,7 +387,7 @@ class MainWindow(qtw.QMainWindow):
                 self.temp_nums = [digit for digit in self.ANS]
                 self.fin_nums = []
 
-        elif self.ANS:
+        elif self.ANS == self.result_field.text():
             if '-' in self.ANS:
                 self.result_field.setText("Invalid Input")
                 self.face_error()
@@ -435,7 +435,7 @@ class MainWindow(qtw.QMainWindow):
             self.temp_nums = [digit for digit in self.ANS]
             self.fin_nums = []
 
-        elif self.ANS:
+        elif self.ANS == self.result_field.text():
             if '.' in self.ANS:
                 num = float(self.ANS)
             else:
@@ -480,7 +480,7 @@ class MainWindow(qtw.QMainWindow):
                 self.temp_nums = [digit for digit in self.ANS]
                 self.fin_nums = []
 
-        elif self.ANS:
+        elif self.ANS == self.result_field.text():
             if '.' in self.ANS:
                 self.result_field.setText("Invalid Input")
                 self.face_error()
@@ -523,7 +523,7 @@ class MainWindow(qtw.QMainWindow):
             self.temp_nums = [digit for digit in self.ANS]
             self.fin_nums = []
 
-        elif self.ANS:
+        elif self.ANS == self.result_field.text():
             if '.' in self.ANS:
                 num = float(''.join(self.ANS))
             else:
@@ -560,7 +560,7 @@ class MainWindow(qtw.QMainWindow):
             self.temp_nums = [digit for digit in self.ANS]
             self.fin_nums = []
 
-        elif self.ANS:
+        elif self.ANS == self.result_field.text():
             if '.' in self.ANS:
                 num = float(''.join(self.ANS))
             else:
@@ -639,10 +639,11 @@ class MainWindow(qtw.QMainWindow):
 
         self.result_field.backspace()
 
-        if self.ANS[:-1] == self.result_field.text():
-            temp = [digit for digit in self.ANS]
-            temp.pop()
-            self.ANS = ''.join(temp)
+        if self.ANS != '':
+            if self.ANS[:-1] == self.result_field.text():
+                temp = [digit for digit in self.ANS]
+                temp.pop()
+                self.ANS = ''.join(temp)
 
         elif ''.join(self.fin_nums)[:-1] == self.result_field.text():
             if len(self.fin_nums) > 1:
@@ -661,6 +662,7 @@ class MainWindow(qtw.QMainWindow):
             self.temp_nums = ['0']
             self.result_field.setText('0')
             self.default_face()
+
 
         else:
             self.temp_nums.pop()
