@@ -17,8 +17,11 @@ executables = [
     Executable('basic_calculator.py', base=base, target_name = 'calculadora')
 ]
 
-setup(name='Calculadora',
+setup(
+      name='Calculadora',
       version = '2.1',
       description = 'Basic_calculator',
       options = {'build_exe': build_options},
-      executables = executables)
+      executables = executables,
+      author = 'Leticia'
+      )
